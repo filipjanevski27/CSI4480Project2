@@ -3,6 +3,10 @@ import os
 import sys
 
 # ToDo: Check for cryptography library
+if "cryptography" not in sys.modules:
+    import subprocess
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "cryptography"])
+    quit()
 
 from cryptography.fernet import Fernet, InvalidToken
 from cryptography.hazmat.backends import default_backend
