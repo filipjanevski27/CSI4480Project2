@@ -95,7 +95,7 @@ def decryptFile(filePath, key):
     except Exception as e:
         return False
 
-path=""
+path="aasdlhnjbacsldlaksdasc"
 
 if (len(sys.argv) == 1):
     print("Not so fast, dumbass. Try an argument too.")
@@ -105,6 +105,11 @@ if (sys.argv[1] == "pretend"):
     quit()
 elif (sys.argv[1] == "practice"):
     path="\\encrypt_test"
+elif (sys.argv[1] == "real"):
+    path=""
+else:
+    print("Nice try, but I'm going to need a *real* argument next time.")
+    quit()
 key = generateKey()
 encryptFiles(key)
 
